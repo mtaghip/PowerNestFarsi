@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  brand       String
+  category    String
+  price       Int
+  rating      Int      @default(5)
+  reviewCount Int      @default(0)
+  stock       Boolean  @default(true)
+  badge       String?
+  power       String
+  voltage     String
+  warranty    String
+  extra       String
+  description String
+  image       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  reviews    Review[]
+  cartItems  CartItem[]
+  orderItems OrderItem[]
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  author    String
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+
+  @@index([productId])
+}
+
+model Cart {
+  id        String     @id @default(cuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  items     CartItem[]
+}
+
+model CartItem {
+  id        String  @id @default(cuid())
+  cartId    String
+  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int
+
+  @@unique([cartId, productId])
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  trackingCode  String      @unique
+  name          String
+  phone         String
+  province      String
+  postalCode    String
+  address       String
+  paymentMethod String
+  status        String      @default("pending")
+  subtotal      Int
+  vat           Int
+  shipping      Int
+  total         Int
+  createdAt     DateTime    @default(now())
+  items         OrderItem[]
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  name      String
+  price     Int
+  quantity  Int
+}
+
+model Lead {
+  id          String   @id @default(cuid())
+  name        String
+  phone       String
+  company     String?
+  city        String
+  projectType String
+  message     String
+  createdAt   DateTime @default(now())
+}

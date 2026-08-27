@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #f6f8f7;
+  color: #12211f;
+  min-height: 100%;
+}
+
+a {
+  color: #0f5b52;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0a3f39;
+}
+
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+}
+
+::placeholder {
+  color: #93a5a2;
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
