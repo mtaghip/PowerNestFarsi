@@ -57,6 +57,30 @@ checkout, and admin CRUD instead of the prototype's in-memory state.
 
    Open [http://localhost:3000](http://localhost:3000).
 
+## Deploying (Vercel)
+
+1. Import the repo into Vercel.
+2. Under Project Settings → Environment Variables, set `DATABASE_URL`,
+   `ADMIN_USERNAME`, `ADMIN_PASSWORD_HASH`, and `SESSION_SECRET`. Paste the
+   bcrypt hash **raw/unescaped** here — the `\$` escaping in `.env.example`
+   is only needed for a local `.env` file (see the comment there for why).
+3. `DATABASE_URL` needs to point at a real reachable Postgres (Supabase, Neon,
+   Railway, RDS, ...) — the throwaway `npx prisma dev` database only exists on
+   your machine. If your provider fronts Postgres with PgBouncer (or another
+   pooler) in transaction mode, append `&pgbouncer=true` to the connection
+   string or Prisma queries will intermittently fail with "prepared statement
+   already exists".
+4. Before or after the first deploy, apply the schema and seed the catalog
+   against that database from your machine (Vercel doesn't run migrations for
+   you):
+   ```bash
+   DATABASE_URL="<your production URL>" npx prisma migrate deploy
+   DATABASE_URL="<your production URL>" npm run seed
+   ```
+5. `npm install`'s `postinstall` script runs `prisma generate` automatically,
+   so the build doesn't need any extra Vercel configuration beyond the env
+   vars above.
+
 ## Admin panel
 
 Visit `/admin`, log in with the username/password you configured
