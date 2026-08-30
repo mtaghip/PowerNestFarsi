@@ -81,6 +81,30 @@ checkout, and admin CRUD instead of the prototype's in-memory state.
    so the build doesn't need any extra Vercel configuration beyond the env
    vars above.
 
+### No machine with Node.js + DB access available?
+
+If you can't run step 4's commands from anywhere (e.g. your only network
+access to the database is through the deployed app itself), there's a
+fallback: `GET /api/bootstrap` (`app/api/bootstrap/route.ts`). It creates the
+schema and seeds the catalog using Prisma Client at runtime — no CLI, no
+local Node.js — so it works from inside a Vercel serverless function, which
+does have network access to your database even when your own machine or
+dev environment doesn't.
+
+1. Add a `BOOTSTRAP_SECRET` env var in Vercel (any long random string) and
+   redeploy (or wait for the next deploy to pick it up).
+2. Visit `https://<your-deployment>/api/bootstrap?secret=<that value>` in a
+   browser once.
+3. You should get back `{"ok":true,"message":"Schema created/verified and
+   12 products seeded...`. If you get `{"error":"not found"}`, the secret
+   didn't match or the env var isn't set yet on that deployment.
+4. Remove the `BOOTSTRAP_SECRET` env var afterward — the route always 404s
+   without it, so removing it disables the endpoint.
+
+It's safe to hit more than once (every statement is idempotent), and it
+also records the migration in `_prisma_migrations` so a later `prisma
+migrate deploy` from a real machine won't conflict with it.
+
 ## Admin panel
 
 Visit `/admin`, log in with the username/password you configured
