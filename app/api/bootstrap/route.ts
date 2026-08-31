@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { products, genericReviews } from "@/lib/seed-data";
@@ -147,6 +148,50 @@ const STATEMENTS = [
   EXCEPTION WHEN duplicate_object THEN NULL; END $$`,
 ];
 
+// Diagnostics, reported alongside any failure so a single request to this
+// endpoint says what actually went wrong — no digging through platform logs.
+// Only reachable with the BOOTSTRAP_SECRET, and it never echoes credentials.
+function describeDatabaseUrl() {
+  const raw = process.env.DATABASE_URL;
+  if (!raw) return "NOT SET";
+  try {
+    const u = new URL(raw);
+    return {
+      protocol: u.protocol,
+      host: u.host,
+      database: u.pathname,
+      params: u.searchParams.toString(),
+      hasUser: Boolean(u.username),
+      hasPassword: Boolean(u.password),
+    };
+  } catch {
+    return "set, but could not be parsed as a URL";
+  }
+}
+
+function listDir(dir: string) {
+  try {
+    return fs.readdirSync(dir);
+  } catch (err) {
+    return `unreadable (${(err as Error).message})`;
+  }
+}
+
+function collectDiagnostics() {
+  const cwd = process.cwd();
+  return {
+    cwd,
+    platform: `${process.platform}/${process.arch}`,
+    nodeVersion: process.version,
+    databaseUrl: describeDatabaseUrl(),
+    engineLocations: {
+      [`${cwd}/node_modules/.prisma/client`]: listDir(`${cwd}/node_modules/.prisma/client`),
+      "/var/task/node_modules/.prisma/client": listDir("/var/task/node_modules/.prisma/client"),
+      [`${cwd}/.prisma/client`]: listDir(`${cwd}/.prisma/client`),
+    },
+  };
+}
+
 export async function GET(req: NextRequest) {
   const expected = process.env.BOOTSTRAP_SECRET;
   const provided = req.nextUrl.searchParams.get("secret");
@@ -155,6 +200,31 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "not found" }, { status: 404 });
   }
 
+  if (req.nextUrl.searchParams.get("diagnose") === "1") {
+    return NextResponse.json({ diagnostics: collectDiagnostics() });
+  }
+
+  try {
+    return await runBootstrap();
+  } catch (err) {
+    const e = err as Error & { code?: string };
+    return NextResponse.json(
+      {
+        ok: false,
+        error: {
+          name: e.name,
+          message: e.message,
+          code: e.code ?? null,
+          stack: (e.stack ?? "").split("\n").slice(0, 12).join("\n"),
+        },
+        diagnostics: collectDiagnostics(),
+      },
+      { status: 500 }
+    );
+  }
+}
+
+async function runBootstrap() {
   for (const sql of STATEMENTS) {
     await prisma.$executeRawUnsafe(sql);
   }
