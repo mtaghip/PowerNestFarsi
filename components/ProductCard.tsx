@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Product } from "@/app/generated/prisma/client";
+import type { Product } from "@prisma/client";
 import { css } from "@/lib/css";
 import { fa, stars } from "@/lib/format";
 import { addToCartAction } from "@/app/actions";

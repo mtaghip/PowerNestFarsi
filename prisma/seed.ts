@@ -1,4 +1,4 @@
-import { PrismaClient } from "../app/generated/prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { products, genericReviews } from "../lib/seed-data";
 
 const prisma = new PrismaClient();

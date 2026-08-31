@@ -5,7 +5,7 @@ import Image from "next/image";
 import { css } from "@/lib/css";
 import { fa, faNum, stars } from "@/lib/format";
 import { addToCartAction } from "@/app/actions";
-import type { Product, Review } from "@/app/generated/prisma/client";
+import type { Product, Review } from "@prisma/client";
 
 const teal = "#0F5B52";
 

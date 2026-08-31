@@ -6,7 +6,7 @@ import Link from "next/link";
 import { css } from "@/lib/css";
 import { fa } from "@/lib/format";
 import { clearCompare, getCompareIds, getServerCompareIds, subscribeCompare, toggleCompare } from "@/lib/compare-client";
-import type { Product } from "@/app/generated/prisma/client";
+import type { Product } from "@prisma/client";
 
 function useCompareIds(): string[] {
   return useSyncExternalStore(subscribeCompare, getCompareIds, getServerCompareIds);

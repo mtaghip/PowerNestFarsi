@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@/app/generated/prisma/client";
+import { Prisma } from "@prisma/client";
 import { setAdminSession, clearAdminSession, isAdminAuthed } from "@/lib/session";
 
 function isDuplicateSlugError(err: unknown): boolean {

@@ -1,6 +1,6 @@
 import { css } from "@/lib/css";
 import { CATEGORIES } from "@/lib/categories";
-import type { Product } from "@/app/generated/prisma/client";
+import type { Product } from "@prisma/client";
 
 const PRODUCT_IMAGES = [
   "/img/prod-inv-hybrid.png",
