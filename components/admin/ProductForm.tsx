@@ -1,6 +1,7 @@
 import { css } from "@/lib/css";
 import { CATEGORIES } from "@/lib/categories";
 import type { Product } from "@prisma/client";
+import { specsToText } from "@/lib/specs";
 
 const PRODUCT_IMAGES = [
   "/img/prod-inv-hybrid.png",
@@ -103,6 +104,19 @@ export default function ProductForm({
           defaultValue={product?.description}
           style={css`width:100%;border:1px solid #E3EAE8;border-radius:10px;padding:12px 14px;font-size:14px;outline:none;background:#F9FBFA;min-height:100px;resize:vertical`}
         />
+      </div>
+
+      <div>
+        <label style={labelStyle}>مشخصات فنی (هر خط: عنوان: مقدار)</label>
+        <textarea
+          name="specs"
+          defaultValue={specsToText(product?.specs)}
+          placeholder={"ولتاژ نامی: ۵۱.۲ ولت\nظرفیت اسمی: ۵.۵ کیلووات‌ساعت\nدرجه حفاظت: IP20"}
+          style={css`width:100%;border:1px solid #E3EAE8;border-radius:10px;padding:12px 14px;font-size:14px;outline:none;background:#F9FBFA;min-height:160px;resize:vertical;line-height:1.9`}
+        />
+        <div style={css`font-size:12px;color:#7C8F8C;margin-top:6px;line-height:1.8`}>
+          هر خط یک ردیف جدول مشخصات است. اگر خالی بماند، ردیف‌های پیش‌فرض نمایش داده می‌شود.
+        </div>
       </div>
 
       <label style={css`display:flex;gap:10px;align-items:center;font-size:13.5px;cursor:pointer;color:#3D5451`}>

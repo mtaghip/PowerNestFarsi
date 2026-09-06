@@ -75,9 +75,10 @@ export default function ProductCard({
             <input type="hidden" name="productId" value={product.id} />
             <button
               type="submit"
-              style={css`border:0;background:#0F5B52;color:#fff;padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;width:100%`}
+              disabled={!product.stock}
+              style={css`border:0;background:${product.stock ? "#0F5B52" : "#CBD9D6"};color:#fff;padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:${product.stock ? "pointer" : "not-allowed"};width:100%`}
             >
-              افزودن به سبد خرید
+              {product.stock ? "افزودن به سبد خرید" : "ناموجود"}
             </button>
           </form>
         ) : (
@@ -86,9 +87,10 @@ export default function ProductCard({
               <input type="hidden" name="productId" value={product.id} />
               <button
                 type="submit"
-                style={css`width:100%;border:0;background:#0F5B52;color:#fff;padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer`}
+                disabled={!product.stock}
+                style={css`width:100%;border:0;background:${product.stock ? "#0F5B52" : "#CBD9D6"};color:#fff;padding:12px;border-radius:10px;font-size:14px;font-weight:600;cursor:${product.stock ? "pointer" : "not-allowed"}`}
               >
-                افزودن به سبد
+                {product.stock ? "افزودن به سبد" : "ناموجود"}
               </button>
             </form>
             <CompareToggle productId={product.id} />

@@ -202,6 +202,11 @@ export default function ProductDetail({
           )}
           {tab === "reviews" && (
             <div style={css`display:grid;gap:14px;max-width:820px`}>
+              {reviews.length === 0 && (
+                <div style={css`font-size:14px;line-height:1.9;color:#7C8F8C`}>
+                  هنوز دیدگاهی برای این محصول ثبت نشده است.
+                </div>
+              )}
               {reviews.map((r) => (
                 <div key={r.id} style={css`border:1px solid #E3EAE8;border-radius:14px;padding:18px`}>
                   <div style={css`display:flex;gap:12px;align-items:center;margin-bottom:10px`}>

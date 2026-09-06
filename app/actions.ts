@@ -10,10 +10,24 @@ const VAT_RATE = 0.09;
 const FREE_SHIPPING_OVER = 500_000_000;
 const SHIPPING_FLAT = 4_500_000;
 
+/**
+ * Out-of-stock products must not be purchasable. The UI disables their
+ * add-to-cart buttons, but that is only a hint — this is the check that
+ * actually holds, since a form post can be replayed with any product id.
+ */
+async function isPurchasable(productId: string): Promise<boolean> {
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+    select: { stock: true },
+  });
+  return Boolean(product?.stock);
+}
+
 export async function addToCartAction(formData: FormData) {
   const productId = String(formData.get("productId") ?? "");
   const qty = Number(formData.get("qty") ?? 1) || 1;
   if (!productId) return;
+  if (!(await isPurchasable(productId))) return;
   await addToCart(productId, qty);
   revalidatePath("/", "layout");
 }
@@ -21,6 +35,7 @@ export async function addToCartAction(formData: FormData) {
 export async function incCartAction(formData: FormData) {
   const productId = String(formData.get("productId") ?? "");
   if (!productId) return;
+  if (!(await isPurchasable(productId))) return;
   await addToCart(productId, 1);
   revalidatePath("/", "layout");
 }
@@ -42,7 +57,7 @@ export async function removeCartAction(formData: FormData) {
 export async function addPackageAction(formData: FormData) {
   const productSlug = String(formData.get("productSlug") ?? "");
   const product = await prisma.product.findUnique({ where: { slug: productSlug } });
-  if (product) {
+  if (product?.stock) {
     await addToCart(product.id, 1);
   }
   revalidatePath("/", "layout");

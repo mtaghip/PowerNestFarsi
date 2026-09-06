@@ -37,6 +37,9 @@ model Product {
   extra       String
   description String
   image       String
+  // Datasheet rows as [{ k: label, v: value }]. When present the product page
+  // renders these instead of the generic placeholder spec rows.
+  specs       Json?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

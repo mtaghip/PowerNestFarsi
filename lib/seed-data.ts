@@ -1,4 +1,51 @@
+// The only product actually in stock. Placeholder reviews are never attached
+// to it — inventing testimonials for a real product you sell would be
+// misleading, so it starts with none.
+export const REAL_PRODUCT_SLUG = "hope-5-5l-a1";
+
+// Slug this product previously used in the catalog. The bootstrap route
+// renames it in place so the existing row is updated rather than orphaned.
+export const RENAMED_FROM = { from: "bat-5", to: REAL_PRODUCT_SLUG };
+
 export const products = [
+  {
+    slug: REAL_PRODUCT_SLUG,
+    name: "باتری لیتیوم ۵.۵ کیلووات‌ساعت گروات مدل Hope 5.5L-A1",
+    brand: "Growatt",
+    category: "باتری لیتیوم",
+    price: 240_000_000,
+    rating: 5,
+    reviewCount: 0,
+    stock: true,
+    badge: "موجود",
+    power: "۵.۵ کیلووات‌ساعت",
+    voltage: "۵۱.۲ ولت",
+    warranty: "۵ سال",
+    extra: "عمق دشارژ ۹۳٪",
+    description:
+      "باتری لیتیوم فسفات آهن (LiFePO4) با ظرفیت ۵.۵ کیلووات‌ساعت و عمق دشارژ ۹۳٪. طراحی جمع‌وجور و نصب آسان، چگالی انرژی و بازده بالا، ایمنی بالای سلول‌های LiFePO4 و امکان اتصال موازی تا ۱۲ پک. مناسب سیستم‌های خورشیدی خانگی و تجاری کوچک.",
+    image: "/img/prod-bat-wall.png",
+    specs: [
+      { k: "ولتاژ نامی", v: "۵۱.۲ ولت" },
+      { k: "ظرفیت اسمی", v: "۵.۵ کیلووات‌ساعت" },
+      { k: "ظرفیت قابل استفاده", v: "۵.۱۲ کیلووات‌ساعت" },
+      { k: "محدوده ولتاژ کاری", v: "۴۰ تا ۵۸.۴ ولت" },
+      { k: "حداکثر جریان دشارژ", v: "۱۰۰ آمپر" },
+      { k: "جریان دشارژ پیک", v: "۱۲۰ آمپر / ۳ ثانیه" },
+      { k: "حداکثر جریان شارژ", v: "۱۰۰ آمپر" },
+      { k: "عمق دشارژ (DoD)", v: "۹۳٪" },
+      { k: "طول عمر چرخه", v: "بیش از ۶۰۰۰ سیکل (۲۵ درجه، ۰.۲C)" },
+      { k: "اتصال موازی", v: "حداکثر ۱۲ پک" },
+      { k: "پورت ارتباطی", v: "CAN / RS485" },
+      { k: "ابعاد (عرض×عمق×ارتفاع)", v: "۴۴۰ × ۵۴۰ × ۱۳۰.۵ میلی‌متر" },
+      { k: "وزن", v: "۴۵ ±۱ کیلوگرم" },
+      { k: "درجه حفاظت", v: "IP20" },
+      { k: "دمای شارژ", v: "۰ تا +۵۵ درجه سانتی‌گراد" },
+      { k: "دمای دشارژ", v: "−۲۰ تا +۵۵ درجه سانتی‌گراد" },
+      { k: "گارانتی", v: "۵ سال" },
+      { k: "استانداردها", v: "CE (EMC)، UN38.3، MSDS، RoHS" },
+    ],
+  },
   {
     slug: "inv-hyb-5",
     name: "اینورتر هیبرید ۵ کیلووات مدل SPH 5000",
@@ -7,8 +54,8 @@ export const products = [
     price: 78_000_000,
     rating: 5,
     reviewCount: 41,
-    stock: true,
-    badge: "پرفروش",
+    stock: false,
+    badge: null,
     power: "۵ کیلووات",
     voltage: "۴۸ ولت DC",
     warranty: "۵ سال",
@@ -16,6 +63,7 @@ export const products = [
     description:
       "اینورتر هیبرید سه‌کاره برای سیستم‌های خانگی: اتصال به شبکه، شارژ باتری و تأمین بار در قطعی برق. با دو ورودی MPPT و پشتیبانی از اپلیکیشن مانیتورینگ.",
     image: "/img/prod-inv-hybrid.png",
+    specs: null,
   },
   {
     slug: "inv-ong-10",
@@ -25,8 +73,8 @@ export const products = [
     price: 132_000_000,
     rating: 5,
     reviewCount: 18,
-    stock: true,
-    badge: "سه‌فاز",
+    stock: false,
+    badge: null,
     power: "۱۰ کیلووات",
     voltage: "۳۸۰ ولت AC",
     warranty: "۱۰ سال",
@@ -34,24 +82,7 @@ export const products = [
     description:
       "اینورتر آنگرید سه‌فاز مناسب کارگاه و ساختمان‌های اداری، با بازده اروپایی ۹۸.۴٪ و قابلیت پایش تولید از راه دور.",
     image: "/img/prod-inv-3ph.png",
-  },
-  {
-    slug: "bat-5",
-    name: "باتری لیتیوم ۵ کیلووات‌ساعت مدل Hope 5.0L",
-    brand: "Growatt",
-    category: "باتری لیتیوم",
-    price: 96_000_000,
-    rating: 4,
-    reviewCount: 27,
-    stock: true,
-    badge: "موجود",
-    power: "۵ کیلووات‌ساعت",
-    voltage: "۵۱.۲ ولت",
-    warranty: "۱۰ سال",
-    extra: "۶۰۰۰ سایکل",
-    description:
-      "باتری لیتیوم فسفات آهن با BMS داخلی و عمر بالای ۶۰۰۰ سایکل. قابل نصب دیواری و توسعه تا چهار ماژول موازی.",
-    image: "/img/prod-bat-wall.png",
+    specs: null,
   },
   {
     slug: "bat-14",
@@ -61,8 +92,8 @@ export const products = [
     price: 245_000_000,
     rating: 5,
     reviewCount: 12,
-    stock: true,
-    badge: "ظرفیت بالا",
+    stock: false,
+    badge: null,
     power: "۱۴.۳ کیلووات‌ساعت",
     voltage: "۵۱.۲ ولت",
     warranty: "۱۰ سال",
@@ -70,6 +101,7 @@ export const products = [
     description:
       "بانک باتری رک‌مونت برای سیستم‌های خانگی بزرگ و تجاری کوچک، با مانیتورینگ سلولی و خنک‌کاری غیرفعال.",
     image: "/img/prod-bat-rack.png",
+    specs: null,
   },
   {
     slug: "bat-10",
@@ -80,7 +112,7 @@ export const products = [
     rating: 4,
     reviewCount: 9,
     stock: false,
-    badge: "ناموجود",
+    badge: null,
     power: "۱۰ کیلووات‌ساعت",
     voltage: "۵۱.۲ ولت",
     warranty: "۸ سال",
@@ -88,6 +120,7 @@ export const products = [
     description:
       "پک باتری صنعتی با درجه حفاظت IP55 برای نصب در محیط نیمه‌باز و ایستگاه‌های پمپاژ.",
     image: "/img/prod-bat-ind.png",
+    specs: null,
   },
   {
     slug: "pkg-3",
@@ -97,8 +130,8 @@ export const products = [
     price: 320_000_000,
     rating: 5,
     reviewCount: 63,
-    stock: true,
-    badge: "پیشنهاد ویژه",
+    stock: false,
+    badge: null,
     power: "۳ کیلووات",
     voltage: "۲۲۰ ولت",
     warranty: "۵ سال",
@@ -106,6 +139,7 @@ export const products = [
     description:
       "پکیج آماده شامل شش پنل ۶۱۰ واتی، اینورتر هیبرید، باتری ۵ کیلووات‌ساعت، سازه و کابل‌کشی، همراه با نصب و راه‌اندازی.",
     image: "/img/prod-pkg-home.png",
+    specs: null,
   },
   {
     slug: "pkg-20",
@@ -115,8 +149,8 @@ export const products = [
     price: 1_850_000_000,
     rating: 5,
     reviewCount: 7,
-    stock: true,
-    badge: "صنعتی",
+    stock: false,
+    badge: null,
     power: "۲۰ کیلووات",
     voltage: "۳۸۰ ولت",
     warranty: "۱۰ سال",
@@ -124,6 +158,7 @@ export const products = [
     description:
       "راهکار کامل کاهش هزینه برق صنعتی: آرایه ۳۳ پنلی، اینورتر سه‌فاز، پایش تولید و امکان قرارداد خرید تضمینی برق مازاد.",
     image: "/img/prod-pkg-ind.png",
+    specs: null,
   },
   {
     slug: "wind-3",
@@ -133,8 +168,8 @@ export const products = [
     price: 210_000_000,
     rating: 4,
     reviewCount: 5,
-    stock: true,
-    badge: "جدید",
+    stock: false,
+    badge: null,
     power: "۳ کیلووات",
     voltage: "۴۸ ولت DC",
     warranty: "۳ سال",
@@ -142,6 +177,7 @@ export const products = [
     description:
       "توربین بادی کوچک برای مناطق بادخیز و سیستم‌های ترکیبی خورشید-باد، با پره‌های کامپوزیت و ترمز الکترومغناطیسی.",
     image: "/img/prod-wind.png",
+    specs: null,
   },
   {
     slug: "ev-11",
@@ -151,8 +187,8 @@ export const products = [
     price: 62_000_000,
     rating: 5,
     reviewCount: 22,
-    stock: true,
-    badge: "هوشمند",
+    stock: false,
+    badge: null,
     power: "۱۱ کیلووات",
     voltage: "۳۸۰ ولت AC",
     warranty: "۳ سال",
@@ -160,6 +196,7 @@ export const products = [
     description:
       "شارژر هوشمند دیواری با کنترل مصرف، زمان‌بندی شارژ در ساعات کم‌باری و هماهنگی با تولید پنل خورشیدی.",
     image: "/img/prod-ev.png",
+    specs: null,
   },
   {
     slug: "sw-300",
@@ -169,8 +206,8 @@ export const products = [
     price: 48_000_000,
     rating: 4,
     reviewCount: 31,
-    stock: true,
-    badge: "کم‌هزینه",
+    stock: false,
+    badge: null,
     power: "۳۰۰ لیتر",
     voltage: "—",
     warranty: "۵ سال",
@@ -178,6 +215,7 @@ export const products = [
     description:
       "آبگرمکن خورشیدی با مخزن استیل و لوله‌های خلأ، مناسب خانه چهار تا شش نفره؛ بدون مصرف برق.",
     image: "/img/prod-heater.png",
+    specs: null,
   },
   {
     slug: "pump-15",
@@ -187,8 +225,8 @@ export const products = [
     price: 71_000_000,
     rating: 4,
     reviewCount: 14,
-    stock: true,
-    badge: "کشاورزی",
+    stock: false,
+    badge: null,
     power: "۱.۵ کیلووات",
     voltage: "۷۲ ولت DC",
     warranty: "۲ سال",
@@ -196,6 +234,7 @@ export const products = [
     description:
       "پمپ شناور DC با درایو خورشیدی، بدون نیاز به باتری؛ برای آبیاری و آبرسانی دام در مناطق دور از شبکه.",
     image: "/img/prod-pump.png",
+    specs: null,
   },
   {
     slug: "pkg-camp",
@@ -205,8 +244,8 @@ export const products = [
     price: 96_000_000,
     rating: 4,
     reviewCount: 38,
-    stock: true,
-    badge: "سفری",
+    stock: false,
+    badge: null,
     power: "۱.۵ کیلووات",
     voltage: "۱۲ ولت DC",
     warranty: "۲ سال",
@@ -214,6 +253,7 @@ export const products = [
     description:
       "مجموعه قابل حمل شامل پنل تاشو، اینورتر ۲۰۰۰ وات، باتری ۱۰۰ آمپرساعت و شارژر خودرو برای سفر و کمپینگ.",
     image: "/img/prod-camp.png",
+    specs: null,
   },
 ];
 

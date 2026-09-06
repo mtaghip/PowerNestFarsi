@@ -7,7 +7,7 @@ import { CATEGORIES } from "@/lib/categories";
 import { posts } from "@/lib/blog";
 import ProductCard from "@/components/ProductCard";
 
-const FEATURED_SLUGS = ["pkg-3", "inv-hyb-5", "bat-5", "ev-11"];
+const FEATURED_SLUGS = ["hope-5-5l-a1", "pkg-3", "inv-hyb-5", "ev-11"];
 
 const whyUs = [
   { no: "۰۱", t: "طراحی رایگان سیستم", d: "قبل از خرید، کارشناس ما مصرف و محل نصب را بررسی می‌کند و طرح فنی با اعداد واقعی می‌دهد." },

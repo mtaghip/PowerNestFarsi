@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 import { setAdminSession, clearAdminSession, isAdminAuthed } from "@/lib/session";
+import { specsFromText } from "@/lib/specs";
 
 function isDuplicateSlugError(err: unknown): boolean {
   return (
@@ -57,6 +58,12 @@ function readProductInput(formData: FormData) {
     extra: String(formData.get("extra") ?? "").trim(),
     description: String(formData.get("description") ?? "").trim(),
     image: String(formData.get("image") ?? "").trim() || "/img/prod-pkg-home.png",
+    // Empty means "no datasheet" — stored as null so the product page falls
+    // back to its generic rows rather than rendering an empty table.
+    specs: (() => {
+      const rows = specsFromText(String(formData.get("specs") ?? ""));
+      return rows.length > 0 ? rows : Prisma.DbNull;
+    })(),
   };
 }
 
