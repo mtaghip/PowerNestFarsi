@@ -143,7 +143,7 @@ export default function ProductDetail({
                 href="/consult"
                 style={css`border:1px solid #CBD9D6;background:#fff;color:#12211F;padding:15px 20px;border-radius:11px;font-size:14.5px;font-weight:600;cursor:pointer;text-decoration:none;display:flex;align-items:center`}
               >
-                استعلام نصب
+                استعلام
               </a>
             </div>
           </div>
