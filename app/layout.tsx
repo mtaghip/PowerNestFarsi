@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 import "./globals.css";
+import { siteUrl } from "@/lib/site-url";
 
 const vazirmatn = Vazirmatn({
   subsets: ["arabic"],
@@ -9,8 +10,10 @@ const vazirmatn = Vazirmatn({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl()),
   title: "آشیانه انرژی | Power Nest Energy",
   description: "بازار آنلاین تجهیزات انرژی خورشیدی و بادی — اینورتر، باتری لیتیوم، پکیج کامل و مشاوره رایگان.",
+  alternates: { canonical: "/" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
