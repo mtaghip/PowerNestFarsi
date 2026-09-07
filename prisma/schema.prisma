@@ -115,5 +115,14 @@ model Lead {
   city        String
   projectType String
   message     String
+  // Slug of the product whose استعلام button started this enquiry, null when
+  // it came from the consult page directly. Deliberately not a relation: the
+  // enquiry records what the customer asked about and has to survive that
+  // product being renamed or deleted.
+  productSlug String?
+  // The inbox's read/unread flag, set once someone has dealt with the enquiry.
+  handled     Boolean  @default(false)
   createdAt   DateTime @default(now())
+
+  @@index([handled, createdAt])
 }

@@ -18,6 +18,10 @@ checkout, and admin CRUD instead of the prototype's in-memory state.
   form, and a blog listing.
 - **Admin panel** (`/admin`): add, edit, and delete products; change price,
   availability, and description. Protected by a single admin login.
+- **Enquiry inbox** (`/admin/leads`): every consult/quote submission, newest
+  first, showing the product the enquiry came from when it started at a
+  product page's استعلام button. Each one can be marked handled or deleted,
+  and the nav badge counts the unhandled ones.
 - **Data**: Postgres via Prisma. Products, reviews, carts, orders, and
   consult leads are all persisted.
 
@@ -116,11 +120,12 @@ and you can add, edit, or delete products, and toggle stock status.
 - `app/(site)/` — public storefront pages (home, shop, product, compare,
   calculator, cart, consult, blog), wrapped in `app/(site)/layout.tsx`
   (header/footer/compare tray).
-- `app/admin/` — admin login and product management, wrapped in its own
-  minimal `app/admin/layout.tsx`.
+- `app/admin/` — admin login, product management, and the enquiry inbox at
+  `app/admin/leads/`, wrapped in its own minimal `app/admin/layout.tsx`.
 - `app/actions.ts` — storefront server actions (cart, checkout, consult
   form).
-- `app/admin/actions.ts` — admin server actions (login/logout, product CRUD).
+- `app/admin/actions.ts` — admin server actions (login/logout, product CRUD,
+  marking enquiries handled).
 - `lib/` — Prisma client, number/date formatting (Persian numerals), the
   solar-sizing calculator logic, cart cookie helpers, admin session signing.
 - `components/` — shared UI (header, footer, product card, checkout form,

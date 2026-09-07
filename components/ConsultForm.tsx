@@ -9,13 +9,29 @@ const line = "#E3EAE8";
 
 const PROJECT_TYPES = ["خانگی", "ویلا و باغ", "صنعتی", "کشاورزی", "نصاب / پیمانکار"];
 
-export default function ConsultForm() {
+export default function ConsultForm({
+  product,
+}: {
+  product?: { slug: string; name: string; brand: string } | null;
+}) {
   const [ptype, setPtype] = useState(PROJECT_TYPES[0]);
 
   return (
     <form action={submitConsultAction}>
       <input type="hidden" name="projectType" value={ptype} />
-      <h1 style={css`margin:0 0 10px;font-size:26px;font-weight:800`}>درخواست مشاوره و استعلام قیمت</h1>
+      {product && <input type="hidden" name="productSlug" value={product.slug} />}
+      <h1 style={css`margin:0 0 10px;font-size:26px;font-weight:800`}>
+        {product ? "استعلام قیمت محصول" : "درخواست مشاوره و استعلام قیمت"}
+      </h1>
+      {product ? (
+        <div
+          style={css`background:#E8F2F0;border:1px solid #CDE2DE;border-radius:12px;padding:14px 16px;margin-bottom:22px`}
+        >
+          <div style={css`font-size:12.5px;color:#5E7370;margin-bottom:5px`}>استعلام درباره:</div>
+          <div style={css`font-size:14.5px;font-weight:700;color:#0A3F39;line-height:1.6`}>{product.name}</div>
+          <div style={css`font-size:12.5px;color:#5E7370;margin-top:4px`}>{product.brand}</div>
+        </div>
+      ) : null}
       <p style={css`margin:0 0 28px;font-size:14.5px;line-height:1.9;color:#5E7370;text-wrap:pretty`}>
         فرم را پر کنید تا طرح فنی و پیش‌فاکتور رسمی برایتان آماده شود. مشاوره و طراحی اولیه سیستم بدون هزینه است.
       </p>

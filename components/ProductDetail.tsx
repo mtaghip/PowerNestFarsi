@@ -140,7 +140,7 @@ export default function ProductDetail({
                 افزودن به سبد خرید
               </button>
               <a
-                href="/consult"
+                href={`/consult?product=${encodeURIComponent(product.slug)}`}
                 style={css`border:1px solid #CBD9D6;background:#fff;color:#12211F;padding:15px 20px;border-radius:11px;font-size:14.5px;font-weight:600;cursor:pointer;text-decoration:none;display:flex;align-items:center`}
               >
                 استعلام

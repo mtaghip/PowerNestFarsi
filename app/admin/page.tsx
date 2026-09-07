@@ -4,7 +4,8 @@ import { css } from "@/lib/css";
 import { fa } from "@/lib/format";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/require-admin";
-import { toggleStockAction, logoutAction } from "@/app/admin/actions";
+import { toggleStockAction } from "@/app/admin/actions";
+import AdminTabs from "@/components/admin/AdminTabs";
 import DeleteProductButton from "@/components/admin/DeleteProductButton";
 
 export default async function AdminProductsPage() {
@@ -12,24 +13,18 @@ export default async function AdminProductsPage() {
   const products = await prisma.product.findMany({ orderBy: { createdAt: "desc" } });
 
   return (
-    <div style={css`max-width:1180px;margin:0 auto;padding:30px 24px 64px`}>
-      <div style={css`display:flex;align-items:center;gap:14px;margin-bottom:24px;flex-wrap:wrap`}>
+    <div className="r-pad" style={css`max-width:1180px;margin:0 auto;padding:30px 24px 64px`}>
+      <AdminTabs active="products" />
+
+      <div className="r-wrap" style={css`display:flex;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap`}>
         <h1 style={css`margin:0;font-size:25px;font-weight:800`}>مدیریت محصولات</h1>
-        <span style={css`flex:1`}></span>
+        <span className="r-wrap-spacer" style={css`flex:1`}></span>
         <Link
           href="/admin/products/new"
           style={css`border:0;background:#0F5B52;color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer`}
         >
           + افزودن محصول
         </Link>
-        <form action={logoutAction}>
-          <button
-            type="submit"
-            style={css`border:1px solid #CBD9D6;background:#fff;padding:12px 18px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer`}
-          >
-            خروج
-          </button>
-        </form>
       </div>
 
       <div style={css`background:#fff;border:1px solid #E3EAE8;border-radius:16px;overflow:hidden`}>

@@ -26,6 +26,9 @@ const MIGRATION_CHECKSUM = "4025def327a289427e9609e6fb8f613c9d69357d5e73af44710e
 const SPECS_MIGRATION_NAME = "20260906000000_add_product_specs";
 const SPECS_MIGRATION_CHECKSUM = "b3028a0bacc619b06cf9dbd503e0f67b854e2900bed035b0adc0f17e16ca11d1";
 
+const LEAD_MIGRATION_NAME = "20260907000000_add_lead_inbox_fields";
+const LEAD_MIGRATION_CHECKSUM = "5bf0ec07373d14774fa3cfef06ebc852928c3b51564c430436d322b3bb026ea9";
+
 const STATEMENTS = [
   `CREATE TABLE IF NOT EXISTS "_prisma_migrations" (
     "id" VARCHAR(36) NOT NULL,
@@ -153,6 +156,11 @@ const STATEMENTS = [
 
   // 20260906000000_add_product_specs
   `ALTER TABLE "Product" ADD COLUMN IF NOT EXISTS "specs" JSONB`,
+
+  // 20260907000000_add_lead_inbox_fields
+  `ALTER TABLE "Lead" ADD COLUMN IF NOT EXISTS "productSlug" TEXT`,
+  `ALTER TABLE "Lead" ADD COLUMN IF NOT EXISTS "handled" BOOLEAN NOT NULL DEFAULT false`,
+  `CREATE INDEX IF NOT EXISTS "Lead_handled_createdAt_idx" ON "Lead"("handled", "createdAt")`,
 ];
 
 // Diagnostics, reported alongside any failure so a single request to this
@@ -239,6 +247,7 @@ async function runBootstrap() {
   for (const [name, checksum] of [
     [MIGRATION_NAME, MIGRATION_CHECKSUM],
     [SPECS_MIGRATION_NAME, SPECS_MIGRATION_CHECKSUM],
+    [LEAD_MIGRATION_NAME, LEAD_MIGRATION_CHECKSUM],
   ]) {
     await prisma.$executeRawUnsafe(
       `INSERT INTO "_prisma_migrations" (id, checksum, finished_at, migration_name, applied_steps_count)

@@ -113,3 +113,19 @@ export async function toggleStockAction(formData: FormData) {
   revalidatePath("/", "layout");
   revalidatePath("/admin");
 }
+
+export async function toggleLeadHandledAction(formData: FormData) {
+  await assertAdmin();
+  const id = String(formData.get("id") ?? "");
+  const lead = await prisma.lead.findUnique({ where: { id }, select: { handled: true } });
+  if (!lead) return;
+  await prisma.lead.update({ where: { id }, data: { handled: !lead.handled } });
+  revalidatePath("/admin/leads");
+}
+
+export async function deleteLeadAction(formData: FormData) {
+  await assertAdmin();
+  const id = String(formData.get("id") ?? "");
+  await prisma.lead.delete({ where: { id } });
+  revalidatePath("/admin/leads");
+}

@@ -123,9 +123,11 @@ export async function submitConsultAction(formData: FormData) {
   const city = String(formData.get("city") ?? "");
   const projectType = String(formData.get("projectType") ?? "خانگی");
   const message = String(formData.get("message") ?? "");
+  // Present only when the enquiry started from a product page's استعلام button.
+  const productSlug = String(formData.get("productSlug") ?? "").trim() || null;
 
   await prisma.lead.create({
-    data: { name, phone, company, city, projectType, message },
+    data: { name, phone, company, city, projectType, message, productSlug },
   });
 
   redirect("/consult?sent=1");

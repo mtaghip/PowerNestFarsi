@@ -1,13 +1,24 @@
 import Image from "next/image";
 import { css } from "@/lib/css";
+import { prisma } from "@/lib/prisma";
 import ConsultForm from "@/components/ConsultForm";
 
 export default async function ConsultPage({
   searchParams,
 }: {
-  searchParams: Promise<{ sent?: string }>;
+  searchParams: Promise<{ sent?: string; product?: string }>;
 }) {
-  const { sent } = await searchParams;
+  const { sent, product: productSlug } = await searchParams;
+
+  // Arriving from a product page's استعلام button. Look the product up rather
+  // than trusting the slug in the URL, so a bad or stale link just renders the
+  // ordinary form instead of naming a product that does not exist.
+  const product = productSlug
+    ? await prisma.product.findUnique({
+        where: { slug: productSlug },
+        select: { slug: true, name: true, brand: true },
+      })
+    : null;
 
   return (
     <div className="r-pad" style={css`max-width:1080px;margin:0 auto;padding:34px 24px 64px`}>
@@ -24,7 +35,7 @@ export default async function ConsultPage({
               </p>
             </div>
           ) : (
-            <ConsultForm />
+            <ConsultForm product={product} />
           )}
         </div>
 
