@@ -63,10 +63,10 @@ export default async function ShopPage({
   const catLabel = cat === "all" ? "همه محصولات" : cat;
 
   return (
-    <div style={css`max-width:1280px;margin:0 auto;padding:26px 24px 64px`}>
+    <div className="r-pad" style={css`max-width:1280px;margin:0 auto;padding:26px 24px 64px`}>
       <div style={css`font-size:13px;color:#7C8F8C;margin-bottom:18px`}>خانه / فروشگاه / {catLabel}</div>
-      <div style={css`display:grid;grid-template-columns:288px minmax(0,1fr);gap:24px;align-items:start`}>
-        <aside style={css`display:grid;gap:14px`}>
+      <div className="r-split" style={css`display:grid;grid-template-columns:288px minmax(0,1fr);gap:24px;align-items:start`}>
+        <aside className="r-filters" style={css`display:grid;gap:14px`}>
           <div style={css`background:#fff;border:1px solid #E3EAE8;border-radius:16px;padding:18px`}>
             <div style={css`font-size:15px;font-weight:700;margin-bottom:14px`}>دسته‌بندی</div>
             <div style={css`display:grid;gap:2px`}>
@@ -128,7 +128,7 @@ export default async function ShopPage({
           </div>
         </aside>
 
-        <div>
+        <div className="r-results">
           <div
             style={css`background:#fff;border:1px solid #E3EAE8;border-radius:16px;padding:14px 18px;display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap`}
           >
@@ -147,13 +147,13 @@ export default async function ShopPage({
           </div>
 
           {list.length > 0 ? (
-            <div style={css`display:grid;grid-template-columns:repeat(3,1fr);gap:16px`}>
+            <div className="r-cards-3" style={css`display:grid;grid-template-columns:repeat(3,1fr);gap:16px`}>
               {list.map((p) => (
                 <ProductCard key={p.id} product={p} variant="shop" />
               ))}
             </div>
           ) : (
-            <div style={css`background:#fff;border:1px dashed #CBD9D6;border-radius:16px;padding:56px;text-align:center`}>
+            <div className="r-roomy" style={css`background:#fff;border:1px dashed #CBD9D6;border-radius:16px;padding:56px;text-align:center`}>
               <div style={css`font-size:17px;font-weight:700;margin-bottom:8px`}>کالایی با این فیلترها پیدا نشد</div>
               <div style={css`font-size:14px;color:#5E7370;margin-bottom:20px`}>
                 سقف قیمت را بالا ببرید یا دسته‌بندی دیگری را انتخاب کنید.

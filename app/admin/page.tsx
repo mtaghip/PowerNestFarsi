@@ -36,6 +36,7 @@ export default async function AdminProductsPage() {
         {products.map((p) => (
           <div
             key={p.id}
+            className="r-row-admin"
             style={css`display:grid;grid-template-columns:56px minmax(0,1fr) 120px 110px auto;gap:16px;padding:14px 18px;border-bottom:1px solid #EDF2F1;align-items:center`}
           >
             <div style={css`width:56px;height:44px;border-radius:8px;overflow:hidden;background:#F0F4F3;position:relative`}>

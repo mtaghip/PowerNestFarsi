@@ -34,7 +34,7 @@ export default function ProductForm({
     <form action={action} style={css`display:grid;gap:16px;max-width:760px`}>
       {product && <input type="hidden" name="id" value={product.id} />}
 
-      <div style={css`display:grid;grid-template-columns:1fr 1fr;gap:14px`}>
+      <div className="r-pair" style={css`display:grid;grid-template-columns:1fr 1fr;gap:14px`}>
         <div>
           <label style={labelStyle}>نام محصول</label>
           <input name="name" required defaultValue={product?.name} style={inputStyle} />

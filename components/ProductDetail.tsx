@@ -53,10 +53,14 @@ export default function ProductDetail({
   return (
     <>
       <div
+        className="r-split r-roomy"
         style={css`background:#fff;border:1px solid #E3EAE8;border-radius:20px;padding:28px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:36px`}
       >
         <div>
-          <div style={css`height:400px;background:#F0F4F3;border-radius:14px;overflow:hidden;margin-bottom:12px;position:relative`}>
+          <div
+            className="r-hero-media"
+            style={css`height:400px;background:#F0F4F3;border-radius:14px;overflow:hidden;margin-bottom:12px;position:relative`}
+          >
             <Image
               src={thumbs[active].src}
               alt={thumbs[active].alt}
@@ -112,7 +116,7 @@ export default function ProductDetail({
               </div>
             </div>
             <div style={css`font-size:12.5px;color:#7C8F8C;margin-bottom:18px`}>قیمت با احتساب مالیات · امکان پرداخت اقساطی تا ۱۲ ماه</div>
-            <div style={css`display:flex;gap:10px`}>
+            <div className="r-wrap" style={css`display:flex;gap:10px`}>
               <div style={css`display:flex;align-items:center;border:1px solid #CBD9D6;border-radius:10px;background:#fff`}>
                 <button
                   onClick={() => setQty((q) => Math.max(1, q - 1))}
@@ -144,7 +148,7 @@ export default function ProductDetail({
             </div>
           </div>
 
-          <div style={css`display:grid;grid-template-columns:repeat(3,1fr);gap:10px;font-size:12.5px;color:#3D5451`}>
+          <div className="r-cards-3" style={css`display:grid;grid-template-columns:repeat(3,1fr);gap:10px;font-size:12.5px;color:#3D5451`}>
             <div style={css`border:1px solid #E3EAE8;border-radius:11px;padding:13px;background:#fff`}>ارسال ۳ تا ۷ روز کاری</div>
             <div style={css`border:1px solid #E3EAE8;border-radius:11px;padding:13px;background:#fff`}>گارانتی تعویض ۷ روزه</div>
             <div style={css`border:1px solid #E3EAE8;border-radius:11px;padding:13px;background:#fff`}>نصب توسط تیم مجاز</div>
@@ -153,7 +157,7 @@ export default function ProductDetail({
       </div>
 
       <div style={css`background:#fff;border:1px solid #E3EAE8;border-radius:20px;margin-top:20px;overflow:hidden`}>
-        <div style={css`display:flex;border-bottom:1px solid #E3EAE8`}>
+        <div className="r-scroll" style={css`display:flex;border-bottom:1px solid #E3EAE8`}>
           {tabs.map((t) => (
             <button
               key={t.v}
@@ -164,9 +168,9 @@ export default function ProductDetail({
             </button>
           ))}
         </div>
-        <div style={css`padding:28px`}>
+        <div className="r-roomy" style={css`padding:28px`}>
           {tab === "spec" && (
-            <div style={css`display:grid;grid-template-columns:1fr 1fr;gap:0 40px`}>
+            <div className="r-pair" style={css`display:grid;grid-template-columns:1fr 1fr;gap:0 40px`}>
               {specFull.map((s) => (
                 <div
                   key={s.k}

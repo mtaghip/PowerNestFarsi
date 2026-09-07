@@ -10,9 +10,9 @@ export default async function ConsultPage({
   const { sent } = await searchParams;
 
   return (
-    <div style={css`max-width:1080px;margin:0 auto;padding:34px 24px 64px`}>
-      <div style={css`display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:20px;align-items:start`}>
-        <div style={css`background:#fff;border:1px solid #E3EAE8;border-radius:20px;padding:34px`}>
+    <div className="r-pad" style={css`max-width:1080px;margin:0 auto;padding:34px 24px 64px`}>
+      <div className="r-split" style={css`display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:20px;align-items:start`}>
+        <div className="r-roomy" style={css`background:#fff;border:1px solid #E3EAE8;border-radius:20px;padding:34px`}>
           {sent ? (
             <div style={css`text-align:center;padding:40px 0`}>
               <div style={css`width:60px;height:60px;border-radius:50%;background:#E8F2F0;color:#0F5B52;font-size:28px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px`}>

@@ -19,7 +19,7 @@ export default function ConsultForm() {
       <p style={css`margin:0 0 28px;font-size:14.5px;line-height:1.9;color:#5E7370;text-wrap:pretty`}>
         فرم را پر کنید تا طرح فنی و پیش‌فاکتور رسمی برایتان آماده شود. مشاوره و طراحی اولیه سیستم بدون هزینه است.
       </p>
-      <div style={css`display:grid;grid-template-columns:1fr 1fr;gap:12px`}>
+      <div className="r-pair" style={css`display:grid;grid-template-columns:1fr 1fr;gap:12px`}>
         <input
           name="name"
           required

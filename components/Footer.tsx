@@ -5,6 +5,7 @@ export default function Footer() {
   return (
     <footer style={css`background:#0A3F39;color:#BFD9D4;margin-top:auto`}>
       <div
+        className="r-footer r-pad"
         style={css`max-width:1280px;margin:0 auto;padding:52px 24px 24px;display:grid;grid-template-columns:minmax(0,1.4fr) 1fr 1fr 1fr;gap:40px`}
       >
         <div>
@@ -92,9 +93,12 @@ export default function Footer() {
         </div>
       </div>
       <div style={css`border-top:1px solid #1D6259`}>
-        <div style={css`max-width:1280px;margin:0 auto;padding:18px 24px;display:flex;gap:20px;align-items:center;font-size:12.5px`}>
+        <div
+          className="r-wrap r-pad"
+          style={css`max-width:1280px;margin:0 auto;padding:18px 24px;display:flex;gap:20px;align-items:center;font-size:12.5px`}
+        >
           <span>© ۱۴۰۵ آشیانه انرژی — تمام حقوق محفوظ است.</span>
-          <span style={css`flex:1`}></span>
+          <span className="r-wrap-spacer" style={css`flex:1`}></span>
           <span>گارانتی رسمی</span>
           <span>پرداخت امن</span>
           <span>ارسال به سراسر ایران</span>

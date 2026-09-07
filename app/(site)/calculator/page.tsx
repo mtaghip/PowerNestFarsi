@@ -46,16 +46,16 @@ export default function CalculatorPage() {
   }
 
   return (
-    <div style={css`max-width:1080px;margin:0 auto;padding:34px 24px 64px`}>
+    <div className="r-pad" style={css`max-width:1080px;margin:0 auto;padding:34px 24px 64px`}>
       <div style={css`text-align:center;margin-bottom:30px`}>
         <div style={css`font-size:13px;font-weight:700;color:#EFA00B;margin-bottom:10px`}>ماشین‌حساب انرژی آشیانه</div>
-        <h1 style={css`margin:0 0 12px;font-size:33px;font-weight:800`}>سیستم خورشیدی من چقدر باید باشد؟</h1>
+        <h1 className="r-h2" style={css`margin:0 0 12px;font-size:33px;font-weight:800`}>سیستم خورشیدی من چقدر باید باشد؟</h1>
         <p style={css`margin:0 auto;font-size:15.5px;line-height:1.85;color:#5E7370;max-width:620px;text-wrap:pretty`}>
           سه سؤال، و تعداد پنل، ظرفیت باتری، توان اینورتر، هزینه تخمینی و سال بازگشت سرمایه را می‌گیرید.
         </p>
       </div>
 
-      <div style={css`display:flex;gap:8px;justify-content:center;margin-bottom:26px`}>
+      <div className="r-wrap" style={css`display:flex;gap:8px;justify-content:center;margin-bottom:26px`}>
         {STEP_NAMES.map((name, i) => {
           const idx = i + 1;
           const bg = step === idx ? teal : step > idx ? "#E8F2F0" : "#fff";
@@ -78,7 +78,7 @@ export default function CalculatorPage() {
           <div style={css`max-width:640px;margin:0 auto`}>
             <h2 style={css`margin:0 0 8px;font-size:21px;font-weight:700`}>مصرف برق شما</h2>
             <p style={css`margin:0 0 26px;font-size:14px;color:#5E7370`}>عدد مصرف ماهانه روی قبض برق نوشته شده است (کیلووات‌ساعت).</p>
-            <div style={css`display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:28px`}>
+            <div className="r-cards-3" style={css`display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:28px`}>
               {USER_TYPES.map((u) => (
                 <button
                   key={u.v}
@@ -127,7 +127,7 @@ export default function CalculatorPage() {
           <div style={css`max-width:720px;margin:0 auto`}>
             <h2 style={css`margin:0 0 8px;font-size:21px;font-weight:700`}>شهر محل نصب</h2>
             <p style={css`margin:0 0 26px;font-size:14px;color:#5E7370`}>میزان تابش خورشید هر شهر، تعداد پنل موردنیاز را تعیین می‌کند.</p>
-            <div style={css`display:grid;grid-template-columns:repeat(5,1fr);gap:10px`}>
+            <div className="r-tiles" style={css`display:grid;grid-template-columns:repeat(5,1fr);gap:10px`}>
               {Object.entries(CITIES).map(([name, irr]) => (
                 <button
                   key={name}
@@ -139,7 +139,7 @@ export default function CalculatorPage() {
                 </button>
               ))}
             </div>
-            <div style={css`display:flex;gap:10px;margin-top:26px`}>
+            <div className="r-wrap" style={css`display:flex;gap:10px;margin-top:26px`}>
               <button
                 onClick={() => setStep(3)}
                 style={css`border:0;background:#0F5B52;color:#fff;padding:15px 30px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer`}
@@ -190,7 +190,7 @@ export default function CalculatorPage() {
                 style={{ width: "100%", accentColor: "#0F5B52" }}
               />
             </div>
-            <div style={css`display:flex;gap:10px;margin-top:26px`}>
+            <div className="r-wrap" style={css`display:flex;gap:10px;margin-top:26px`}>
               <button
                 onClick={() => setStep(4)}
                 style={css`border:0;background:#EFA00B;color:#3A2600;padding:15px 32px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer`}
@@ -223,7 +223,7 @@ export default function CalculatorPage() {
               </button>
             </div>
 
-            <div style={css`display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px`}>
+            <div className="r-cards-4" style={css`display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px`}>
               {[
                 { k: "تعداد پنل ۶۱۰ واتی", v: `${faNum(result.panels)} عدد`, s: `آرایه ${faDec(result.arrayKw)} کیلووات` },
                 { k: "ظرفیت باتری", v: `${faNum(result.battery)} kWh`, s: "لیتیوم فسفات آهن" },
@@ -238,7 +238,7 @@ export default function CalculatorPage() {
               ))}
             </div>
 
-            <div style={css`display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px`}>
+            <div className="r-split" style={css`display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px`}>
               <div style={css`border:1px solid #E3EAE8;border-radius:16px;overflow:hidden`}>
                 <div style={css`padding:16px 20px;background:#F6F8F7;font-size:15px;font-weight:700;border-bottom:1px solid #E3EAE8`}>
                   جزئیات فنی و اقتصادی

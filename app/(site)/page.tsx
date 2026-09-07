@@ -30,6 +30,7 @@ export default async function HomePage() {
     <div>
       <section style={css`background:#fff;border-bottom:1px solid #E3EAE8`}>
         <div
+          className="r-split r-pad"
           style={css`max-width:1280px;margin:0 auto;padding:56px 24px 60px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px;align-items:center`}
         >
           <div>
@@ -38,7 +39,7 @@ export default async function HomePage() {
             >
               بازار آزاد انرژی · واردات مستقیم از ۹ برند
             </div>
-            <h1 style={css`margin:0 0 18px;font-size:47px;line-height:1.28;font-weight:800;letter-spacing:-.5px;text-wrap:pretty`}>
+            <h1 className="r-display" style={css`margin:0 0 18px;font-size:47px;line-height:1.28;font-weight:800;letter-spacing:-.5px;text-wrap:pretty`}>
               برق خودت را بساز،
               <br />
               از خورشید و باد.
@@ -47,7 +48,7 @@ export default async function HomePage() {
               پنل، اینورتر، باتری لیتیوم و پکیج کامل — با طراحی رایگان سیستم، نصب توسط تیم مجاز و گارانتی تعویض. برای
               خانه، کارخانه و پیمانکاران.
             </p>
-            <div style={css`display:flex;gap:12px;margin-bottom:34px`}>
+            <div className="r-cta" style={css`display:flex;gap:12px;margin-bottom:34px`}>
               <Link
                 href="/calculator"
                 style={css`border:0;background:#0F5B52;color:#fff;padding:16px 30px;border-radius:12px;font-size:15.5px;font-weight:700;cursor:pointer`}
@@ -62,6 +63,7 @@ export default async function HomePage() {
               </Link>
             </div>
             <div
+              className="r-stats"
               style={css`display:grid;grid-template-columns:repeat(3,auto);gap:34px;justify-content:start;border-top:1px solid #EDF2F1;padding-top:24px`}
             >
               <div>
@@ -80,7 +82,10 @@ export default async function HomePage() {
           </div>
 
           <div style={css`position:relative`}>
-            <div style={css`position:relative;height:420px;border-radius:20px;overflow:hidden;background:#EDF2F1;min-width:0`}>
+            <div
+              className="r-hero-media"
+              style={css`position:relative;height:420px;border-radius:20px;overflow:hidden;background:#EDF2F1;min-width:0`}
+            >
               <Image
                 src="/img/hero.png"
                 alt="پنل خورشیدی روی پشت‌بام ویلا"
@@ -91,6 +96,7 @@ export default async function HomePage() {
               />
             </div>
             <div
+              className="r-float-card"
               style={css`position:absolute;bottom:-28px;right:-18px;width:296px;background:#fff;border:1px solid #E3EAE8;border-radius:16px;box-shadow:0 18px 40px rgba(12,45,41,.13);padding:18px 20px`}
             >
               <div style={css`font-size:12.5px;color:#7C8F8C;margin-bottom:12px`}>نمونه پیکربندی · پکیج خانگی</div>
@@ -121,12 +127,12 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section style={css`max-width:1280px;margin:0 auto;padding:44px 24px 8px`}>
-        <div style={css`display:flex;align-items:baseline;gap:14px;margin-bottom:18px`}>
+      <section className="r-pad" style={css`max-width:1280px;margin:0 auto;padding:44px 24px 8px`}>
+        <div className="r-wrap" style={css`display:flex;align-items:baseline;gap:14px;margin-bottom:18px`}>
           <h2 style={css`margin:0;font-size:23px;font-weight:700`}>خرید بر اساس دسته‌بندی</h2>
           <span style={css`font-size:14px;color:#7C8F8C`}>۷ گروه کالا، همه با گارانتی رسمی</span>
         </div>
-        <div style={css`display:grid;grid-template-columns:repeat(7,1fr);gap:12px`}>
+        <div className="r-tiles" style={css`display:grid;grid-template-columns:repeat(7,1fr);gap:12px`}>
           {CATEGORIES.map((c) => (
             <Link
               key={c.name}
@@ -145,13 +151,14 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section style={css`max-width:1280px;margin:0 auto;padding:44px 24px 0`}>
+      <section className="r-pad" style={css`max-width:1280px;margin:0 auto;padding:44px 24px 0`}>
         <div
+          className="r-split r-roomy"
           style={css`background:#0F5B52;border-radius:22px;padding:44px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center;color:#fff`}
         >
           <div>
             <div style={css`font-size:13px;color:#EFA00B;font-weight:700;margin-bottom:14px`}>ابزار اختصاصی آشیانه</div>
-            <h2 style={css`margin:0 0 14px;font-size:32px;font-weight:800;line-height:1.4`}>
+            <h2 className="r-h2" style={css`margin:0 0 14px;font-size:32px;font-weight:800;line-height:1.4`}>
               دقیقاً چند پنل و چند کیلووات‌ساعت باتری لازم دارید؟
             </h2>
             <p style={css`margin:0 0 26px;font-size:16px;line-height:1.85;color:#C9DFDB;max-width:520px;text-wrap:pretty`}>
@@ -182,23 +189,23 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section style={css`max-width:1280px;margin:0 auto;padding:48px 24px 0`}>
-        <div style={css`display:flex;align-items:baseline;gap:14px;margin-bottom:18px`}>
+      <section className="r-pad" style={css`max-width:1280px;margin:0 auto;padding:48px 24px 0`}>
+        <div className="r-wrap" style={css`display:flex;align-items:baseline;gap:14px;margin-bottom:18px`}>
           <h2 style={css`margin:0;font-size:23px;font-weight:700`}>پرفروش‌ترین‌های این ماه</h2>
           <span style={css`flex:1`}></span>
           <Link href="/shop" style={css`font-size:14px;font-weight:600`}>
             مشاهده همه محصولات ←
           </Link>
         </div>
-        <div style={css`display:grid;grid-template-columns:repeat(4,1fr);gap:16px`}>
+        <div className="r-cards-4" style={css`display:grid;grid-template-columns:repeat(4,1fr);gap:16px`}>
           {orderedFeatured.map((p) => (
             <ProductCard key={p.id} product={p} variant="featured" />
           ))}
         </div>
       </section>
 
-      <section style={css`max-width:1280px;margin:0 auto;padding:52px 24px 0`}>
-        <div style={css`display:grid;grid-template-columns:repeat(4,1fr);gap:16px`}>
+      <section className="r-pad" style={css`max-width:1280px;margin:0 auto;padding:52px 24px 0`}>
+        <div className="r-cards-4" style={css`display:grid;grid-template-columns:repeat(4,1fr);gap:16px`}>
           {whyUs.map((w) => (
             <div key={w.no} style={css`background:#fff;border:1px solid #E3EAE8;border-radius:16px;padding:24px`}>
               <div style={css`font-size:13px;font-weight:700;color:#EFA00B;margin-bottom:12px`}>{w.no}</div>
@@ -209,13 +216,14 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section style={css`max-width:1280px;margin:0 auto;padding:52px 24px 0`}>
+      <section className="r-pad" style={css`max-width:1280px;margin:0 auto;padding:52px 24px 0`}>
         <div
+          className="r-split"
           style={css`background:#fff;border:1px solid #E3EAE8;border-radius:22px;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)`}
         >
-          <div style={css`padding:44px`}>
+          <div className="r-roomy" style={css`padding:44px`}>
             <div style={css`font-size:13px;font-weight:700;color:#0F5B52;margin-bottom:14px`}>همکاری تجاری</div>
-            <h2 style={css`margin:0 0 14px;font-size:28px;font-weight:800;line-height:1.45`}>
+            <h2 className="r-h2" style={css`margin:0 0 14px;font-size:28px;font-weight:800;line-height:1.45`}>
               نصاب یا پیمانکار هستید؟ قیمت عمده و اعتبار خرید بگیرید
             </h2>
             <p style={css`margin:0 0 24px;font-size:15.5px;line-height:1.9;color:#5E7370;max-width:470px;text-wrap:pretty`}>
@@ -252,15 +260,15 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section style={css`max-width:1280px;margin:0 auto;padding:52px 24px 64px`}>
-        <div style={css`display:flex;align-items:baseline;gap:14px;margin-bottom:18px`}>
+      <section className="r-pad" style={css`max-width:1280px;margin:0 auto;padding:52px 24px 64px`}>
+        <div className="r-wrap" style={css`display:flex;align-items:baseline;gap:14px;margin-bottom:18px`}>
           <h2 style={css`margin:0;font-size:23px;font-weight:700`}>راهنما و آموزش</h2>
           <span style={css`flex:1`}></span>
           <Link href="/blog" style={css`font-size:14px;font-weight:600`}>
             همه مقالات ←
           </Link>
         </div>
-        <div style={css`display:grid;grid-template-columns:repeat(3,1fr);gap:16px`}>
+        <div className="r-cards-3" style={css`display:grid;grid-template-columns:repeat(3,1fr);gap:16px`}>
           {posts.slice(0, 3).map((b) => (
             <Link
               key={b.id}

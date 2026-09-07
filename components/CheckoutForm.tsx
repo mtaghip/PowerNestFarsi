@@ -29,12 +29,16 @@ export default function CheckoutForm({
   const [pay, setPay] = useState("gateway");
 
   return (
-    <form action={placeOrderAction} style={css`display:grid;grid-template-columns:minmax(0,1fr) 372px;gap:20px;align-items:start`}>
+    <form
+      action={placeOrderAction}
+      className="r-split"
+      style={css`display:grid;grid-template-columns:minmax(0,1fr) 372px;gap:20px;align-items:start`}
+    >
       <input type="hidden" name="paymentMethod" value={pay} />
       <div style={css`display:grid;gap:16px`}>
         <div style={css`background:#fff;border:1px solid #E3EAE8;border-radius:18px;padding:24px`}>
           <div style={css`font-size:16px;font-weight:700;margin-bottom:18px`}>اطلاعات ارسال و نصب</div>
-          <div style={css`display:grid;grid-template-columns:1fr 1fr;gap:12px`}>
+          <div className="r-pair" style={css`display:grid;grid-template-columns:1fr 1fr;gap:12px`}>
             <input
               name="name"
               required
