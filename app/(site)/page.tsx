@@ -272,7 +272,7 @@ export default async function HomePage() {
           {posts.slice(0, 3).map((b) => (
             <Link
               key={b.id}
-              href="/blog"
+              href={`/blog/${b.slug}`}
               style={css`background:#fff;border:1px solid #E3EAE8;border-radius:16px;overflow:hidden;cursor:pointer;display:block`}
             >
               <div style={css`height:170px;background:#F0F4F3;position:relative`}>

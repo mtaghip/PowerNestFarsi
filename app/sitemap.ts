@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
 import { CATEGORIES } from "@/lib/categories";
+import { posts } from "@/lib/blog";
 import { siteUrl } from "@/lib/site-url";
 
 // Regenerate at most once an hour rather than on every crawler hit.
@@ -28,6 +29,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  // Blog articles. Static content, so no database round trip.
+  const blogPages: MetadataRoute.Sitemap = posts.map((p) => ({
+    url: `${base}/blog/${p.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
   // A database hiccup must not take the whole sitemap down — serve the
   // static entries rather than returning an error to the crawler.
   let productPages: MetadataRoute.Sitemap = [];
@@ -48,5 +57,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // /cart, /compare, /admin/* and /api/* are deliberately absent: they are
   // per-visitor, client-state-only, or private.
-  return [...staticPages, ...categoryPages, ...productPages];
+  return [...staticPages, ...categoryPages, ...productPages, ...blogPages];
 }
