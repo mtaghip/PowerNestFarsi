@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { css } from "@/lib/css";
+import { PHONE_DISPLAY, EMAIL } from "@/lib/contact";
 
 export default function Footer() {
   return (
@@ -85,8 +86,10 @@ export default function Footer() {
         <div>
           <div style={css`font-size:14.5px;font-weight:700;color:#fff;margin-bottom:16px`}>پشتیبانی</div>
           <div style={css`display:grid;gap:11px;font-size:13.5px`}>
-            <span>۰۲۱-۹۱۰۰۵۵۰۰</span>
-            <span>sales@ashianeh.energy</span>
+            {/* text-align keeps it flush right with the rest of the column —
+                the ltr box would otherwise align its digits to the left. */}
+            <span style={css`direction:ltr;unicode-bidi:isolate;text-align:right`}>{PHONE_DISPLAY}</span>
+            <span>{EMAIL}</span>
             <span>تهران، خیابان مطهری، پلاک ۱۴۲</span>
             <span>شنبه تا چهارشنبه ۹ تا ۱۸</span>
           </div>

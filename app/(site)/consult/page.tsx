@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { css } from "@/lib/css";
 import { prisma } from "@/lib/prisma";
+import { PHONE_DISPLAY, EMAIL, OFFICE_HOURS } from "@/lib/contact";
 import ConsultForm from "@/components/ConsultForm";
 
 export default async function ConsultPage({
@@ -44,15 +45,15 @@ export default async function ConsultPage({
             <div style={css`font-size:16px;font-weight:700;margin-bottom:14px`}>تماس مستقیم</div>
             <div style={css`font-size:13.5px;line-height:2.1;color:#C9DFDB`}>
               <div>
-                تلفن: <span style={css`color:#fff;font-weight:600`}>۰۲۱-۹۱۰۰۵۵۰۰</span>
+                تلفن: <span style={css`color:#fff;font-weight:600;direction:ltr;unicode-bidi:isolate;`}>{PHONE_DISPLAY}</span>
               </div>
               <div>
-                واتساپ: <span style={css`color:#fff;font-weight:600`}>۰۹۳۹-۹۰۹۴۰۰۷</span>
+                واتساپ: <span style={css`color:#fff;font-weight:600;direction:ltr;unicode-bidi:isolate;`}>{PHONE_DISPLAY}</span>
               </div>
               <div>
-                ایمیل: <span style={css`color:#fff;font-weight:600`}>sales@ashianeh.energy</span>
+                ایمیل: <span style={css`color:#fff;font-weight:600`}>{EMAIL}</span>
               </div>
-              <div style={css`margin-top:10px`}>شنبه تا چهارشنبه ۹ تا ۱۸ · پنجشنبه ۹ تا ۱۳</div>
+              <div style={css`margin-top:10px`}>{OFFICE_HOURS}</div>
             </div>
           </div>
           <div style={css`background:#fff;border:1px solid #E3EAE8;border-radius:18px;padding:24px`}>

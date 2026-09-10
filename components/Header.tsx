@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { css } from "@/lib/css";
 import { faNum } from "@/lib/format";
+import { PHONE_DISPLAY } from "@/lib/contact";
 
 const teal = "#0F5B52";
 
@@ -34,7 +35,7 @@ export default function Header({ cartCount }: { cartCount: number }) {
           </span>
           <span style={css`flex:1`}></span>
           <span style={css`white-space:nowrap`}>
-            پشتیبانی فنی: <span style={css`color:#EFA00B;font-weight:600;letter-spacing:.5px`}>۰۲۱-۹۱۰۰۵۵۰۰</span>
+            پشتیبانی فنی: <span style={css`color:#EFA00B;font-weight:600;letter-spacing:.5px;direction:ltr;unicode-bidi:isolate;`}>{PHONE_DISPLAY}</span>
           </span>
           <span className="r-hide-sm" style={css`width:1px;height:14px;background:#2A5F58`}></span>
           <Link href="/consult" className="r-hide-sm" style={css`color:#BFD9D4`}>
