@@ -15,7 +15,7 @@ export const products = [
     name: "باتری لیتیومی گرووات مدل Hope 5.5L-A1 ظرفیت ۵.۵ کیلووات ساعت ۱۰۰ آمپر",
     brand: "Growatt",
     category: "باتری لیتیوم",
-    price: 240_000_000,
+    price: 265_000_000,
     rating: 5,
     reviewCount: 0,
     stock: true,
