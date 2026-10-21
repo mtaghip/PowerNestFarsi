@@ -1,7 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { css } from "@/lib/css";
 import { posts } from "@/lib/blog";
+
+export const metadata: Metadata = {
+  title: "آموزش و وبلاگ انرژی خورشیدی | آشیانه انرژی",
+  description:
+    "راهنمای انتخاب، نصب و نگهداری سیستم‌های خورشیدی: انتخاب اینورتر، باتری لیتیوم، بازگشت سرمایه، شست‌وشوی پنل و پمپ خورشیدی.",
+  alternates: { canonical: "/blog" },
+};
 
 export default function BlogPage() {
   return (

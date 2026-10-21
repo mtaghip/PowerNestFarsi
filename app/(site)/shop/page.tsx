@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { css } from "@/lib/css";
 import { faNum } from "@/lib/format";
@@ -25,6 +26,31 @@ function hrefFor(sp: Record<string, string | undefined>, patch: Record<string, s
   }
   const qs = params.toString();
   return qs ? `/shop?${qs}` : "/shop";
+}
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | undefined>>;
+}): Promise<Metadata> {
+  const sp = await searchParams;
+  // Only a real category earns its own canonical; an unknown ?cat= falls back
+  // to the shop rather than minting an indexable URL for it.
+  const cat = CATEGORIES.find((c) => c.name === sp.cat)?.name;
+
+  // Sorting, brand, price and stock filters only reorder or narrow the same
+  // listing, so every combination points at the category page (or the shop).
+  const canonical = cat ? `/shop?cat=${encodeURIComponent(cat)}` : "/shop";
+
+  return {
+    title: cat ? `خرید ${cat} | قیمت و مشخصات | آشیانه انرژی` : "فروشگاه تجهیزات خورشیدی | آشیانه انرژی",
+    description: cat
+      ? `خرید ${cat} با گارانتی رسمی، مشخصات فنی کامل و مشاوره رایگان انتخاب. ارسال به سراسر ایران.`
+      : "خرید باتری لیتیوم، اینورتر، پکیج خورشیدی، توربین بادی، شارژر خودرو برقی و پمپ خورشیدی با گارانتی رسمی.",
+    alternates: { canonical },
+    // Internal search results are thin, endlessly varied pages.
+    ...(sp.q?.trim() ? { robots: { index: false, follow: true } } : {}),
+  };
 }
 
 export default async function ShopPage({

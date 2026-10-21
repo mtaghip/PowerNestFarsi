@@ -10,7 +10,9 @@ export const RENAMED_FROM = { from: "bat-5", to: REAL_PRODUCT_SLUG };
 export const products = [
   {
     slug: REAL_PRODUCT_SLUG,
-    name: "باتری لیتیوم ۵.۵ کیلووات‌ساعت گروات مدل Hope 5.5L-A1",
+    // Worded to match how buyers search for it — "گرووات" is the common Persian
+    // spelling of Growatt, and the capacity and current are part of the query.
+    name: "باتری لیتیومی گرووات مدل Hope 5.5L-A1 ظرفیت ۵.۵ کیلووات ساعت ۱۰۰ آمپر",
     brand: "Growatt",
     category: "باتری لیتیوم",
     price: 240_000_000,
@@ -23,7 +25,7 @@ export const products = [
     warranty: "۵ سال",
     extra: "عمق دشارژ ۹۳٪",
     description:
-      "باتری لیتیوم فسفات آهن (LiFePO4) با ظرفیت ۵.۵ کیلووات‌ساعت و عمق دشارژ ۹۳٪. طراحی جمع‌وجور و نصب آسان، چگالی انرژی و بازده بالا، ایمنی بالای سلول‌های LiFePO4 و امکان اتصال موازی تا ۱۲ پک. مناسب سیستم‌های خورشیدی خانگی و تجاری کوچک.",
+      "باتری لیتیومی گرووات (Growatt) مدل Hope 5.5L-A1 یک باتری لیتیوم فسفات آهن (LiFePO4) با ولتاژ نامی ۵۱.۲ ولت، ظرفیت اسمی ۵.۵ کیلووات ساعت و ظرفیت قابل استفاده ۵.۱۲ کیلووات ساعت است. حداکثر جریان شارژ و دشارژ پیوسته آن ۱۰۰ آمپر، عمق دشارژ ۹۳٪ و عمر آن بیش از ۶۰۰۰ سیکل است. امکان اتصال موازی تا ۱۲ پک، ارتباط با اینورتر از طریق CAN و RS485 و گارانتی ۵ ساله، این باتری گروات را به گزینه‌ای مطمئن برای سیستم‌های خورشیدی خانگی و تجاری کوچک تبدیل می‌کند.",
     image: "/img/prod-bat-wall.png",
     specs: [
       { k: "ولتاژ نامی", v: "۵۱.۲ ولت" },

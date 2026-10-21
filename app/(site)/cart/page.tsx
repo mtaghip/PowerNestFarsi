@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { css } from "@/lib/css";
@@ -9,6 +10,12 @@ import CheckoutForm from "@/components/CheckoutForm";
 const VAT_RATE = 0.09;
 const FREE_SHIPPING_OVER = 500_000_000;
 const SHIPPING_FLAT = 4_500_000;
+
+// Per-visitor state with nothing to index; robots.txt already disallows it.
+export const metadata: Metadata = {
+  title: "سبد خرید | آشیانه انرژی",
+  robots: { index: false, follow: true },
+};
 
 export default async function CartPage({
   searchParams,

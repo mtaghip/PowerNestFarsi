@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { css } from "@/lib/css";
@@ -6,6 +7,13 @@ import { prisma } from "@/lib/prisma";
 import { CATEGORIES } from "@/lib/categories";
 import { posts } from "@/lib/blog";
 import ProductCard from "@/components/ProductCard";
+
+export const metadata: Metadata = {
+  title: "آشیانه انرژی | فروش اینورتر، باتری لیتیوم و پکیج خورشیدی",
+  description:
+    "فروش تجهیزات انرژی خورشیدی و بادی: باتری لیتیوم، اینورتر هیبرید و آنگرید، پکیج کامل خورشیدی، با طراحی رایگان سیستم، نصب توسط تیم مجاز و ارسال به سراسر ایران.",
+  alternates: { canonical: "/" },
+};
 
 const FEATURED_SLUGS = ["hope-5-5l-a1", "pkg-3", "inv-hyb-5", "ev-11"];
 

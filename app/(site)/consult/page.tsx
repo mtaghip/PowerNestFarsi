@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { css } from "@/lib/css";
 import { prisma } from "@/lib/prisma";
 import { PHONE_DISPLAY, EMAIL, OFFICE_HOURS } from "@/lib/contact";
 import ConsultForm from "@/components/ConsultForm";
+
+export const metadata: Metadata = {
+  title: "درخواست مشاوره و استعلام قیمت | آشیانه انرژی",
+  description:
+    "مشاوره رایگان و استعلام قیمت سیستم خورشیدی، باتری لیتیوم و اینورتر. طرح فنی و پیش‌فاکتور رسمی برای خانه، صنعت و کشاورزی.",
+  // Enquiries arriving from a product page carry ?product=; they are all the
+  // same page as far as a search engine is concerned.
+  alternates: { canonical: "/consult" },
+};
 
 export default async function ConsultPage({
   searchParams,

@@ -1,12 +1,46 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 import { css } from "@/lib/css";
 import { prisma } from "@/lib/prisma";
 import { parseSpecs } from "@/lib/specs";
+import { siteUrl } from "@/lib/site-url";
+import { jsonLd, tomanToRial, excerpt } from "@/lib/json-ld";
 import ProductDetail from "@/components/ProductDetail";
+
+// generateMetadata and the page both need the product; cache() makes that one
+// database query per request rather than two.
+const getProduct = cache((slug: string) => prisma.product.findUnique({ where: { slug } }));
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const product = await getProduct(slug);
+  if (!product) return { title: "محصول پیدا نشد | آشیانه انرژی" };
+
+  const description = excerpt(product.description);
+
+  return {
+    // The product name leads, so the words a buyer searches for are the first
+    // thing in the search result.
+    title: `${product.name} | آشیانه انرژی`,
+    description,
+    alternates: { canonical: `/product/${product.slug}` },
+    openGraph: {
+      title: product.name,
+      description,
+      url: `/product/${product.slug}`,
+      siteName: "آشیانه انرژی",
+      locale: "fa_IR",
+      type: "website",
+      images: [{ url: product.image, alt: product.name }],
+    },
+  };
+}
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const product = await prisma.product.findUnique({ where: { slug } });
+  const product = await getProduct(slug);
   if (!product) notFound();
 
   const reviews = await prisma.review.findMany({
@@ -44,11 +78,67 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     ]);
   }
 
+  const base = siteUrl();
+  const url = `${base}/product/${product.slug}`;
+  const categoryUrl = `${base}/shop?cat=${encodeURIComponent(product.category)}`;
+
+  // schema.org Product, which is what lets Google show price and availability
+  // under the result. aggregateRating is deliberately absent: the product has
+  // no real reviews yet, and Google treats ratings without reviews behind them
+  // as spam.
+  const productLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: [`${base}${product.image}`],
+    sku: product.slug,
+    brand: { "@type": "Brand", name: product.brand },
+    category: product.category,
+    offers: {
+      "@type": "Offer",
+      url,
+      price: tomanToRial(product.price),
+      priceCurrency: "IRR",
+      availability: product.stock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+      itemCondition: "https://schema.org/NewCondition",
+      seller: { "@type": "Organization", name: "آشیانه انرژی", url: base },
+    },
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "خانه", item: `${base}/` },
+      { "@type": "ListItem", position: 2, name: "فروشگاه", item: `${base}/shop` },
+      { "@type": "ListItem", position: 3, name: product.category, item: categoryUrl },
+      { "@type": "ListItem", position: 4, name: product.name, item: url },
+    ],
+  };
+
   return (
-    <div style={css`max-width:1280px;margin:0 auto;padding:26px 24px 64px`}>
-      <div style={css`font-size:13px;color:#7C8F8C;margin-bottom:18px`}>
-        خانه / فروشگاه / {product.category} / {product.name}
-      </div>
+    <div className="r-pad" style={css`max-width:1280px;margin:0 auto;padding:26px 24px 64px`}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(productLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbLd) }} />
+
+      {/* Real links rather than plain text, so the trail is also a path back
+          up the site for both visitors and crawlers. */}
+      <nav aria-label="مسیر صفحه" style={css`font-size:13px;color:#7C8F8C;margin-bottom:18px;line-height:1.9`}>
+        <Link href="/" style={css`color:#7C8F8C`}>
+          خانه
+        </Link>
+        {" / "}
+        <Link href="/shop" style={css`color:#7C8F8C`}>
+          فروشگاه
+        </Link>
+        {" / "}
+        <Link href={`/shop?cat=${encodeURIComponent(product.category)}`} style={css`color:#7C8F8C`}>
+          {product.category}
+        </Link>
+        {" / "}
+        <span>{product.name}</span>
+      </nav>
       <ProductDetail product={product} specBase={specBase} specFull={specFull} reviews={reviews} />
     </div>
   );

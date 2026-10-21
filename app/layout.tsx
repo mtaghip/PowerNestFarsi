@@ -13,7 +13,16 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
   title: "آشیانه انرژی | Power Nest Energy",
   description: "بازار آنلاین تجهیزات انرژی خورشیدی و بادی — اینورتر، باتری لیتیوم، پکیج کامل و مشاوره رایگان.",
-  alternates: { canonical: "/" },
+  // No `alternates.canonical` here on purpose. Metadata merges shallowly, so a
+  // canonical set in the root layout is inherited by every page that doesn't
+  // override it — and a canonical of "/" on a product page tells Google that
+  // page is a duplicate of the homepage, which keeps it out of the results.
+  // Each page declares its own canonical instead.
+  openGraph: {
+    siteName: "آشیانه انرژی",
+    locale: "fa_IR",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
