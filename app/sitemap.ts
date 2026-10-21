@@ -19,11 +19,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
   ];
 
-  // Category browse pages. They are query-string URLs rather than clean
-  // paths, so they carry less weight than a dedicated route would — but they
-  // are real, distinct, linked-to pages, so they belong in the sitemap.
+  // Category pages, each with its own clean URL.
   const categoryPages: MetadataRoute.Sitemap = CATEGORIES.map((c) => ({
-    url: `${base}/shop?cat=${encodeURIComponent(c.name)}`,
+    url: `${base}/shop/${c.slug}`,
     lastModified: now,
     changeFrequency: "weekly",
     priority: 0.7,

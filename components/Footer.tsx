@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { css } from "@/lib/css";
-import { PHONE_DISPLAY, EMAIL } from "@/lib/contact";
+import { PHONE_DISPLAY } from "@/lib/contact";
 
 export default function Footer() {
   return (
@@ -40,22 +40,22 @@ export default function Footer() {
         <div>
           <div style={css`font-size:14.5px;font-weight:700;color:#fff;margin-bottom:16px`}>دسته‌بندی‌ها</div>
           <div style={css`display:grid;gap:11px;font-size:13.5px`}>
-            <Link href="/shop?cat=اینورتر" style={css`color:#BFD9D4`}>
+            <Link href="/shop/inverter" style={css`color:#BFD9D4`}>
               اینورتر
             </Link>
-            <Link href="/shop?cat=باتری لیتیوم" style={css`color:#BFD9D4`}>
+            <Link href="/shop/lithium-battery" style={css`color:#BFD9D4`}>
               باتری لیتیوم
             </Link>
-            <Link href="/shop?cat=سیستم کامل" style={css`color:#BFD9D4`}>
+            <Link href="/shop/solar-package" style={css`color:#BFD9D4`}>
               پکیج کامل خورشیدی
             </Link>
-            <Link href="/shop?cat=توربین بادی" style={css`color:#BFD9D4`}>
+            <Link href="/shop/wind-turbine" style={css`color:#BFD9D4`}>
               توربین بادی
             </Link>
-            <Link href="/shop?cat=شارژر خودرو برقی" style={css`color:#BFD9D4`}>
+            <Link href="/shop/ev-charger" style={css`color:#BFD9D4`}>
               شارژر خودرو برقی
             </Link>
-            <Link href="/shop?cat=آبگرمکن خورشیدی" style={css`color:#BFD9D4`}>
+            <Link href="/shop/solar-water-heater" style={css`color:#BFD9D4`}>
               پمپ و آبگرمکن خورشیدی
             </Link>
           </div>
@@ -89,7 +89,6 @@ export default function Footer() {
             {/* text-align keeps it flush right with the rest of the column —
                 the ltr box would otherwise align its digits to the left. */}
             <span style={css`direction:ltr;unicode-bidi:isolate;text-align:right`}>{PHONE_DISPLAY}</span>
-            <span>{EMAIL}</span>
             <span>تهران، خیابان مطهری، پلاک ۱۴۲</span>
             <span>شنبه تا چهارشنبه ۹ تا ۱۸</span>
           </div>

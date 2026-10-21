@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { css } from "@/lib/css";
 import { prisma } from "@/lib/prisma";
-import { PHONE_DISPLAY, EMAIL, OFFICE_HOURS } from "@/lib/contact";
+import { PHONE_DISPLAY, OFFICE_HOURS } from "@/lib/contact";
 import ConsultForm from "@/components/ConsultForm";
 
 export const metadata: Metadata = {
@@ -59,9 +59,6 @@ export default async function ConsultPage({
               </div>
               <div>
                 واتساپ: <span style={css`color:#fff;font-weight:600;direction:ltr;unicode-bidi:isolate;`}>{PHONE_DISPLAY}</span>
-              </div>
-              <div>
-                ایمیل: <span style={css`color:#fff;font-weight:600`}>{EMAIL}</span>
               </div>
               <div style={css`margin-top:10px`}>{OFFICE_HOURS}</div>
             </div>

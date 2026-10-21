@@ -5,9 +5,12 @@ import { cache } from "react";
 import { css } from "@/lib/css";
 import { prisma } from "@/lib/prisma";
 import { parseSpecs } from "@/lib/specs";
+import { categoryHref } from "@/lib/categories";
 import { siteUrl } from "@/lib/site-url";
 import { jsonLd, tomanToRial, excerpt } from "@/lib/json-ld";
 import ProductDetail from "@/components/ProductDetail";
+import ProductFaq from "@/components/ProductFaq";
+import { getProductFaq } from "@/lib/product-faq";
 
 // generateMetadata and the page both need the product; cache() makes that one
 // database query per request rather than two.
@@ -80,7 +83,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
   const base = siteUrl();
   const url = `${base}/product/${product.slug}`;
-  const categoryUrl = `${base}/shop?cat=${encodeURIComponent(product.category)}`;
+  const categoryUrl = `${base}${categoryHref(product.category)}`;
 
   // schema.org Product, which is what lets Google show price and availability
   // under the result. aggregateRating is deliberately absent: the product has
@@ -117,10 +120,29 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     ],
   };
 
+  const faq = getProductFaq(product.slug);
+
+  // Google no longer shows FAQ rich results for most commercial sites, but the
+  // markup is still valid, still read by other search and AI engines, and
+  // costs nothing when it mirrors Q&A that is visibly on the page.
+  const faqLd =
+    faq.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faq.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }
+      : null;
+
   return (
     <div className="r-pad" style={css`max-width:1280px;margin:0 auto;padding:26px 24px 64px`}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(productLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbLd) }} />
+      {faqLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(faqLd) }} />}
 
       {/* Real links rather than plain text, so the trail is also a path back
           up the site for both visitors and crawlers. */}
@@ -133,13 +155,14 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           فروشگاه
         </Link>
         {" / "}
-        <Link href={`/shop?cat=${encodeURIComponent(product.category)}`} style={css`color:#7C8F8C`}>
+        <Link href={categoryHref(product.category)} style={css`color:#7C8F8C`}>
           {product.category}
         </Link>
         {" / "}
         <span>{product.name}</span>
       </nav>
       <ProductDetail product={product} specBase={specBase} specFull={specFull} reviews={reviews} />
+      <ProductFaq items={faq} title="سؤالات متداول" />
     </div>
   );
 }

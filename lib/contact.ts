@@ -19,6 +19,4 @@ export const PHONE_DISPLAY = "۰۹۳۰-۴۳۷۳۵۵۶";
 /** For `tel:` and `wa.me` links, which need plain digits. */
 export const PHONE_E164 = "+989304373556";
 
-export const EMAIL = "sales@ashianeh.energy";
-
 export const OFFICE_HOURS = "شنبه تا چهارشنبه ۹ تا ۱۸ · پنجشنبه ۹ تا ۱۳";

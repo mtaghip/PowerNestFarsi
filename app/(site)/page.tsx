@@ -7,6 +7,9 @@ import { prisma } from "@/lib/prisma";
 import { CATEGORIES } from "@/lib/categories";
 import { posts } from "@/lib/blog";
 import ProductCard from "@/components/ProductCard";
+import { siteUrl } from "@/lib/site-url";
+import { jsonLd } from "@/lib/json-ld";
+import { PHONE_E164 } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "آشیانه انرژی | فروش اینورتر، باتری لیتیوم و پکیج خورشیدی",
@@ -34,8 +37,30 @@ export default async function HomePage() {
   );
   const countByCategory = new Map(categoryCounts.map((c) => [c.category, c._count._all]));
 
+  // Tells search engines who runs the site and how to reach them. Deliberately
+  // limited to details that are real: no logo (there is no logo image file
+  // yet) and no address (the footer's is still a placeholder from the design
+  // prototype). Add both here once they exist.
+  const base = siteUrl();
+  const organizationLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "آشیانه انرژی",
+    alternateName: "Power Nest Energy",
+    url: `${base}/`,
+    telephone: PHONE_E164,
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: PHONE_E164,
+      contactType: "sales",
+      areaServed: "IR",
+      availableLanguage: "fa",
+    },
+  };
+
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(organizationLd) }} />
       <section style={css`background:#fff;border-bottom:1px solid #E3EAE8`}>
         <div
           className="r-split r-pad"
@@ -144,7 +169,7 @@ export default async function HomePage() {
           {CATEGORIES.map((c) => (
             <Link
               key={c.name}
-              href={`/shop?cat=${encodeURIComponent(c.name)}`}
+              href={`/shop/${c.slug}`}
               style={css`background:#fff;border:1px solid #E3EAE8;border-radius:14px;padding:16px 14px;cursor:pointer;transition:.18s;display:block`}
             >
               <div style={css`height:74px;border-radius:10px;overflow:hidden;background:#F0F4F3;margin-bottom:12px;position:relative`}>
